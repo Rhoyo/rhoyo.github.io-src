@@ -1,9 +1,14 @@
 import * as React from "react"
+import theme from "../theme";
 
 
 const Header = () => {
   return (
-    <div>header</div>
+    <div style={{
+      color: theme.palette.background.paper
+    }}>
+      header
+    </div>
   )
 }
 
