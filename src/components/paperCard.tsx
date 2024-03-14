@@ -4,7 +4,7 @@ import Paper from '@mui/material/Paper';
 
 interface PaperCardProps {
     text: string; 
-    elevation: number;
+    elevation?: number;
   }
 
 const PaperCard: React.FC<PaperCardProps> = ({ text, elevation=3 }) => {
