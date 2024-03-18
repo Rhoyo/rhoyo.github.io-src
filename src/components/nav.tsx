@@ -14,24 +14,32 @@ const NavigationBar = () => {
   };
 
   return (
-    <div>
-      <IconButton onClick={() => toggleDrawer(true)}>
-      </IconButton>
-      <Drawer anchor="left" open={isDrawerOpen} onClose={() => toggleDrawer(false)}>
+    <>
+      <IconButton
+        style = {{
+          color: theme.palette.secondary.main
+        }}
+       onClick={
+        () => toggleDrawer(true)
+       }
+       >
+        Menu
+       </IconButton>
+
+      <Drawer anchor="top" open={isDrawerOpen} onClose={() => toggleDrawer(false)}>
         <List>
-          <ListItem button>
+          <ListItem>
             <ListItemText primary="Home" />
           </ListItem>
-          <ListItem button>
+          <ListItem>
             <ListItemText primary="About" />
           </ListItem>
-          <ListItem button>
+          <ListItem>
             <ListItemText primary="Contact" />
           </ListItem>
-          {/* Add more ListItem components as needed */}
         </List>
       </Drawer>
-    </div>
+    </>
   );
 };
 

@@ -17,10 +17,9 @@ const IndexPage: React.FC<PageProps> = () => {
         color: theme.palette.text.primary,
       }}>
         <Header/>
-        <NavigationBar></NavigationBar>
-        testing my script
+
         <PaperCard
-          text="this is text testing my paperCard.tsx component with props"
+          text="SUP ALAN"
           elevation={1}/>
         <Footer/>
       </main>

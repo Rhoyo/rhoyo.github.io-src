@@ -1,14 +1,13 @@
 import * as React from "react"
 import theme from "../theme";
-
+import AppBar from '@mui/material/AppBar'
+import NavigationBar from "./nav";
 
 const Header = () => {
   return (
-    <div style={{
-      color: theme.palette.background.paper
-    }}>
-      header
-    </div>
+    <AppBar>
+      <NavigationBar/>
+    </AppBar>
   )
 }
 
