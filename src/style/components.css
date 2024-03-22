@@ -1,0 +1,9 @@
+/* Header Classes */
+.header-list-item {
+    justify-content: center !important;
+    background-color: 'transparent', 
+}
+
+.header {
+    position: initial !important
+}

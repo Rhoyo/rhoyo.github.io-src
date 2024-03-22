@@ -13,15 +13,9 @@ const IndexPage: React.FC<PageProps> = () => {
       <main style={{
         backgroundColor: theme.palette.background.default, 
         minHeight: '100vh', 
-        padding: theme.spacing(2), 
         color: theme.palette.text.primary,
       }}>
         <Header/>
-
-        <PaperCard
-          text="SUP ALAN"
-          elevation={1}/>
-        <Footer/>
       </main>
     </ThemeProvider>
   )

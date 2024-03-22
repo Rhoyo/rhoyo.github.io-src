@@ -19,7 +19,7 @@ const theme = createTheme({
       secondary: '#eeeeee',
     },
   },
-  spacing: 8,
+  spacing: 8, 
 });
 
 export default theme;

@@ -5,7 +5,9 @@ import NavigationBar from "./nav";
 
 const Header = () => {
   return (
-    <AppBar>
+    <AppBar
+      className = 'header'
+    >
       <NavigationBar/>
     </AppBar>
   )
