@@ -7,3 +7,13 @@
 .header {
     position: initial !important
 }
+
+/* Text Classes */
+
+.centered-text {
+    text-align: center;
+}
+
+.centered-p {
+    margin-left: 25%
+}
