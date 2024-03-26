@@ -51,7 +51,7 @@ const NavigationBar: React.FC = () => {
       >
         <List
           style={
-            window.outerWidth > 450 ?     
+            window && window.outerWidth > 450 ?     
               {
                 display: 'flex',
                 background: 'rgba(5,32,14, 0.8)'
