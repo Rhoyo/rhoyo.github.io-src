@@ -5,7 +5,6 @@ import Footer from "../components/footer"
 import About from "../components/about"
 import { ThemeProvider } from '@mui/material/styles';
 import theme from "../theme"
-import PaperCard from "../components/paperCard"
 
 const IndexPage: React.FC<PageProps> = () => {
   return (
@@ -14,7 +13,6 @@ const IndexPage: React.FC<PageProps> = () => {
         backgroundColor: theme.palette.background.default, 
         minHeight: '100vh', 
         color: theme.palette.text.primary,
-        // display: 'flex'
       }}>
         <Header/>
         <About/>

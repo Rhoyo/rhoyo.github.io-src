@@ -7,7 +7,6 @@ This is the section that will hold my about informatiom
 import * as React from "react"
 import { Paper } from "@mui/material";
 import theme from "../theme";
-import { textAlign } from "@mui/system";
 
 const About: React.FC = () => {
   return (
@@ -23,24 +22,17 @@ const About: React.FC = () => {
         >
             ρ
         </h1>
-        <div
+        <p
+            className="centered-text"
             style = {{
-                marginLeft: '10vw',
-                marginRight: '10vw',
-                display: 'flex'
+                padding: '5vw'
             }}
         >
-            <p
-                className="centered-p"
-            >
-                <p
-                    style={{textAlign:'center'}}
-                >
-                    Density.
-                </p><br/> 
-                Widely recognized by the greek symbol, ρ, rho.
-            </p>  
-        </div>   
+            Density.
+            <br/>
+            <br/>
+            Widely recognized by the greek symbol, ρ, rho.
+        </p> 
     </Paper>
   )
 }

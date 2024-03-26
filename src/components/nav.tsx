@@ -6,6 +6,7 @@ import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
 import theme from "../theme"; 
 import '../style/components.css';
+import MenuIcon from '@mui/icons-material/Menu';
 
 const NavigationBar: React.FC = () => {
   const [isDrawerOpen, setDrawerOpen] = useState(false);
@@ -39,19 +40,29 @@ const NavigationBar: React.FC = () => {
         }
        }
        >
-        ρ
+        <MenuIcon/>
        </IconButton>
 
       <Drawer 
         anchor="top" 
         open={isDrawerOpen} 
         onClose={() => toggleDrawer(false, 'flex')}
+        
       >
         <List
-          style={{
-            display: 'flex',
-            margin: '10px',
-          }}
+          style={
+            window.outerWidth > 450 ?     
+              {
+                display: 'flex',
+                background: 'rgba(5,32,14, 0.8)'
+              }
+            :
+              {
+                maxHeight: '150px',
+                overflow: 'auto',
+                background: 'rgba(5,32,14, 0.8)'
+              }
+        }
         >
           <ListItem
             className='header-list-item'
