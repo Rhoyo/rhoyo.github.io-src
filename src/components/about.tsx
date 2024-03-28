@@ -6,11 +6,11 @@ This is the section that will hold my about informatiom
 
 import * as React from "react"
 import { Paper } from "@mui/material";
-import theme from "../theme";
 
 const About: React.FC = () => {
   return (
     <Paper
+        id = 'about'
         elevation={2}
         style = {{
             marginLeft: '20vw',

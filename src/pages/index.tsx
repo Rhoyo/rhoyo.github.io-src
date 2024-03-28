@@ -1,10 +1,15 @@
 import * as React from "react"
 import type { HeadFC, PageProps } from "gatsby"
+import { ThemeProvider } from '@mui/material/styles';
+import theme from "../theme"
+import '../style/components.css';
+
+// components
 import Header from "../components/header"
 import Footer from "../components/footer"
 import About from "../components/about"
-import { ThemeProvider } from '@mui/material/styles';
-import theme from "../theme"
+import Website from "../components/website";
+
 
 const IndexPage: React.FC<PageProps> = () => {
   return (
@@ -16,6 +21,12 @@ const IndexPage: React.FC<PageProps> = () => {
       }}>
         <Header/>
         <About/>
+        <Website
+          link={'https://www.cpb.bank/'}
+          title={'Central Pacific Bank'}
+        />
+      
+
       </main>
     </ThemeProvider>
   )

@@ -1,11 +1,18 @@
+/*
+    Justify-content: main-axis
+    align-items: cross-axis
+    align-content: control space between
+*/
+
+
 /* Header Classes */
 .header-list-item {
     justify-content: center !important;
-    background-color: 'transparent', 
+    background-color: 'transparent'; 
 }
 
 .header {
-    position: initial !important
+    position: initial !important;
 }
 
 /* Text Classes */
@@ -14,6 +21,22 @@
     text-align: center;
 }
 
-.centered-p {
-    margin-left: 25%
+/* Website Class */
+
+.website-div {
+    /* background: none; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 45%;
+    padding: 2%;
+    margin: 3%;
+}
+
+.website-header {
+    text-align: center;
+}
+
+.website-iframe {
+    border: 1px solid white;
 }
