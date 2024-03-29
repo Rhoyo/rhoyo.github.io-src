@@ -9,6 +9,7 @@ import Header from "../components/header"
 import Footer from "../components/footer"
 import About from "../components/about"
 import Website from "../components/website";
+import ScrollTo from "../components/scrollTo";
 
 
 const IndexPage: React.FC<PageProps> = () => {
@@ -25,7 +26,7 @@ const IndexPage: React.FC<PageProps> = () => {
           link={'https://www.cpb.bank/'}
           title={'Central Pacific Bank'}
         />
-      
+        <ScrollTo/>
 
       </main>
     </ThemeProvider>

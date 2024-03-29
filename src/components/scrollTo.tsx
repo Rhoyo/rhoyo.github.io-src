@@ -4,9 +4,10 @@ This is the component that will hold the button that allows the user to scroll t
 
 */
 
-import React, { useEffect } from 'react';
+import * as React from "react"
 import IconButton from '@mui/material/IconButton';
-import theme from "../theme"; 
+import ArrowCircleUpIcon from '@mui/icons-material/ArrowCircleUp';
+import { Paper } from "@mui/material";
 import '../style/components.css';
 
 const handleScrollToTop = () => {
@@ -15,11 +16,20 @@ const handleScrollToTop = () => {
 
 const ScrollTo: React.FC = () => {
     return (
-        <>
-        <IconButton>
-
+        <IconButton
+            onClick = { () => {
+                handleScrollToTop();
+            }}
+            style = {
+                {
+                    position: 'absolute',
+                    right: '5vw',
+                    bottom: '5vw'
+                }
+            }
+        >
+            <ArrowCircleUpIcon/>
         </IconButton>
-        </>
     );
 }
 
