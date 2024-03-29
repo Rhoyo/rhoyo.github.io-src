@@ -26,8 +26,18 @@ const Website: React.FC<WebsiteProps> = ({ link, title }) => {
             className = 'website-iframe'
             src = {link}
             title = {title}
-            width = {window.document.body.scrollWidth/2}
-            height = {window.document.body.scrollHeight/2}
+            width = { typeof window !== 'undefined' ? (
+                window.document.body.scrollWidth/2
+                )
+                :
+                '50%'
+            }
+            height = { typeof window !== 'undefined' ? (
+                window.document.body.scrollHeight/2
+                )
+                :
+                '50%'
+            }
         >
         </iframe>
     </Box>
