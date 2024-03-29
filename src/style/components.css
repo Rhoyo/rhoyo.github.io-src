@@ -27,8 +27,8 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 45%;
-    height: 75vw;
+    width: 40%;
+    height: 60vw;
     padding: 2%;
     margin: 3%;
 }
@@ -41,4 +41,17 @@
     border: 1px solid white;
     width: 100%;
     height: 60%;
+}
+
+.portfolio {
+    display: flex;
+    flex-direction: row;
+}
+
+@media screen and (max-width: 750px) {
+    .portfolio {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 }

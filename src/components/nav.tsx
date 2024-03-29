@@ -5,7 +5,6 @@ import ListItem from '@mui/material/ListItem';
 import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
 import theme from "../theme"; 
-import '../style/components.css';
 import MenuIcon from '@mui/icons-material/Menu';
 
 const NavigationBar: React.FC = () => {

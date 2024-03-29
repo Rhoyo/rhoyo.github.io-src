@@ -10,7 +10,19 @@ import Footer from "../components/footer"
 import About from "../components/about"
 import Website from "../components/website";
 import ScrollTo from "../components/scrollTo";
+import Portfolio from "../components/portfolio";
 
+
+const PortfolioProps = {
+  links: [
+    'https://www.cpb.bank/',
+    'https://boardofwatersupply.com/',
+  ],
+  titles: [
+    'Central Pacific Bank',
+    'Board of Water Supply'
+  ]
+}
 
 const IndexPage: React.FC<PageProps> = () => {
   return (
@@ -22,9 +34,9 @@ const IndexPage: React.FC<PageProps> = () => {
       }}>
         <Header/>
         <About/>
-        <Website
-          link={'https://www.cpb.bank/'}
-          title={'Central Pacific Bank'}
+        <Portfolio
+          links = {PortfolioProps.links}
+          titles = {PortfolioProps.titles}
         />
         <ScrollTo/>
 
