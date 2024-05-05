@@ -11,16 +11,19 @@ import About from "../components/about"
 import Website from "../components/website";
 import ScrollTo from "../components/scrollTo";
 import Portfolio from "../components/portfolio";
+import { Box } from "@mui/material";
 
 
 const PortfolioProps = {
   links: [
     'https://www.cpb.bank/',
     'https://boardofwatersupply.com/',
+    'resume',
   ],
   titles: [
     'Central Pacific Bank',
-    'Board of Water Supply'
+    'Board of Water Supply',
+    'Resume',
   ]
 }
 

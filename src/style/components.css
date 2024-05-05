@@ -27,6 +27,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     width: 40%;
     height: 60vw;
     padding: 2%;
@@ -35,12 +36,30 @@
 
 .website-header {
     text-align: center;
+    margin-top: 0%;
+    margin-bottom: 0%;
 }
 
 .website-iframe {
     border: 1px solid white;
-    width: 100%;
-    height: 60%;
+    width: 200%;
+    height: 200%;
+    transform: scale(0.5);
+}
+
+.resume-iframe {
+    border: 1px solid white;
+    width: 200%;
+    height: 200%;
+}
+
+/* Hide specific elements within the iframe */
+iframe::-webkit-pdf-toolbar {
+    display: none !important;
+}
+  
+iframe::-webkit-pdf-navpane {
+    display: none !important;
 }
 
 .portfolio {

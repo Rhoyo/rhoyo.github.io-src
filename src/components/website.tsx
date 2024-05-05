@@ -5,6 +5,7 @@ This is the component that will host the iframe that'll contain the website I've
 */
 import * as React from "react"
 import Box from '@mui/material/Box';
+import resumePDF from '../resources/resume.pdf';
 
 interface WebsiteProps {
     link: string
@@ -21,12 +22,25 @@ const Website: React.FC<WebsiteProps> = ({ link, title }) => {
         >
             {title}
         </h2>
-        <iframe
-            className = 'website-iframe'
-            src = {link}
-            title = {title}
-        >
-        </iframe>
+        { link != 'resume' ?
+            <iframe
+                className = 'website-iframe'
+                src = {
+                    link
+                }
+                title = {title}
+            >
+            </iframe>
+            :
+            <embed
+                className = 'website-iframe'
+                src = {
+                    resumePDF + '#toolbar=0'
+                }
+                title = {title}
+            >
+            </embed>
+        }
     </Box>
   );
 };
