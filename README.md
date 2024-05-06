@@ -1,49 +1,25 @@
-<p align="center">
-  <a href="https://www.gatsbyjs.com/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts">
-    <img alt="Gatsby" src="https://www.gatsbyjs.com/Gatsby-Monogram.svg" width="60" />
-  </a>
-</p>
-<h1 align="center">
-  Gatsby Minimal TypeScript Starter
-</h1>
+# PERSONAL SITE
 
-## 🚀 Quick start
+## Development
 
-1.  **Create a Gatsby site.**
+Use `gatsby develop` to have gatsby running and automatically building on changes.  
 
-    Use the Gatsby CLI to create a new site, specifying the minimal TypeScript starter.
+### Want to Add new Functionality and Content?
 
-    ```shell
-    # create a new Gatsby site using the minimal TypeScript starter
-    npm init gatsby -- -ts
-    ```
+- Find your package on `node packages`
+- use `npm i [package]`
+- Implement that functionality
 
-2.  **Start developing.**
+Once completed changes, `git push origin dev` to branch `dev` on github.
 
-    Navigate into your new site’s directory and start it up.
+## Deploying the Site
 
-    ```shell
-    cd my-gatsby-site/
-    npm run develop
-    ```
+Deploy to the internet: 
+- `npm run deploy`
 
-3.  **Open the code and start customizing!**
+This command runs 
+- `gatsby build`: builds static site to the folder `public`
+- `gh-pages -d public`: pushes the built site to the designated branch `main` which is the repo that `gh-pages` points to as source for the internet.
+- `bash rebuildSite.sh`: manual rebuild, authorized by credentials stored in local `~.bashrc`, handle cases where `gh-pages` can't detect any.
 
-    Your site is now running at http://localhost:8000!
-
-    Edit `src/pages/index.tsx` to see your site update in real-time!
-
-4.  **Learn more**
-
-    - [Documentation](https://www.gatsbyjs.com/docs/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts)
-    - [Tutorials](https://www.gatsbyjs.com/docs/tutorial/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts)
-    - [Guides](https://www.gatsbyjs.com/docs/how-to/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts)
-    - [API Reference](https://www.gatsbyjs.com/docs/api-reference/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts)
-    - [Plugin Library](https://www.gatsbyjs.com/plugins?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts)
-    - [Cheat Sheet](https://www.gatsbyjs.com/docs/cheat-sheet/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts)
-
-## 🚀 Quick start (Netlify)
-
-Deploy this starter with one click on [Netlify](https://app.netlify.com/signup):
-
-[<img src="https://www.netlify.com/img/deploy/button.svg" alt="Deploy to Netlify" />](https://app.netlify.com/start/deploy?repository=https://github.com/gatsbyjs/gatsby-starter-minimal-ts)
+ `gh-pages -d public`  `bash rebuildSite.sh`
