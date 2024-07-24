@@ -18,3 +18,25 @@ jobs:
       
       - name: Build Gatsby Static Site
         run: npm run build
+
+      - name: Upload Publid Dir as Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: public-dr
+          path: public/
+  
+  Deploy:
+    runs-on: ubuntu-latest
+    needs: Build
+
+    steps:
+      - name: Download build artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: public-dir
+          path: ./public
+    
+      - name: List public
+        run: cd public && ls -a
+      
+
