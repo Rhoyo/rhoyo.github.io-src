@@ -1,1 +1,8 @@
 
+name: Sandbox Pipeline
+on: [push]
+jobs:
+  Build:
+    runs-on: alpine-latest
+    steps:
+    - run: echo "workflow"
