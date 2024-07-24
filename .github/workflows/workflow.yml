@@ -36,7 +36,12 @@ jobs:
           name: public-dir
           path: ./public
     
-      - name: List public
-        run: cd public && ls -a
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GH_PAGES_TOKEN }}
+          publish_dir: ./public
+          publish_branch: test
+          destination_repo: rhoyo/rhoyo.github.io
       
 
