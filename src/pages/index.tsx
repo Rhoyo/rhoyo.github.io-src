@@ -5,14 +5,8 @@ import theme from "../theme"
 import '../style/components.css';
 
 // components
-import Header from "../components/header"
-import Footer from "../components/footer"
-import About from "../components/about"
-import Website from "../components/website";
 import ScrollTo from "../components/scrollTo";
-import Portfolio from "../components/portfolio";
-import { Box } from "@mui/material";
-
+import WaveScene from "../components/waveScene";
 
 const PortfolioProps = {
   links: [
@@ -35,13 +29,7 @@ const IndexPage: React.FC<PageProps> = () => {
         minHeight: '100vh', 
         color: theme.palette.text.primary,
       }}>
-        <Header/>
-        <About/>
-        <Portfolio
-          links = {PortfolioProps.links}
-          titles = {PortfolioProps.titles}
-        />
-        <ScrollTo/>
+      <WaveScene/>
 
       </main>
     </ThemeProvider>
@@ -50,4 +38,4 @@ const IndexPage: React.FC<PageProps> = () => {
 
 export default IndexPage
 
-export const Head: HeadFC = () => <title>Home Page</title>
+export const Head: HeadFC = () => <title>rho</title>
