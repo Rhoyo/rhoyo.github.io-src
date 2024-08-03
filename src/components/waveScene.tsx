@@ -3,8 +3,10 @@ import * as THREE from 'three';
 
 const WaveScene: React.FC = () => {
   const mountRef = useRef<HTMLDivElement>(null);
-  const [radiusTop, setRadiusTop] = useState(5);
-  const [radiusBottom, setRadiusBottom] = useState(5);
+
+  // Wave Vars
+  const [radiusTop, setRadiusTop] = useState(1);
+  const [radiusBottom, setRadiusBottom] = useState(1);
   const [radiusX, setRadiusX] = useState(10); // Radius for X-axis
   const [radiusY, setRadiusY] = useState(6); // Radius for Y-axis
   const [height, setHeight] = useState(100);
@@ -12,6 +14,7 @@ const WaveScene: React.FC = () => {
   const [heightSegments, setHeightSegments] = useState(10);
   const [thetaLength, setThetaLength] = useState(Math.PI * 0.5); // Start at 0.5 radian
   const thetaStart = Math.PI * 1.5; // 225 degrees in radians
+
 
   useEffect(() => {
     const currentMount = mountRef.current;
@@ -24,7 +27,7 @@ const WaveScene: React.FC = () => {
     renderer.setSize(window.innerWidth, window.innerHeight);
     currentMount.appendChild(renderer.domElement);
 
-    // Create initial wave/tunnel geometry
+    // Create initial wave/tunnel and shoulder geometry
     let wave = createWave();
     scene.add(wave);
 
@@ -45,11 +48,15 @@ const WaveScene: React.FC = () => {
       for (let i = 0; i < positionAttribute.count; i++) {
         vector.fromBufferAttribute(positionAttribute, i);
         
+
+        // NEED TO CHECK THE BOTTOM HALF OF THE OVAL ITS THE SHOULDER THAT GROWS BUT SLOWER
+        // THE TOP HALF OF THE OVAL SHOULD EXPAND FASTER THAN THE BOTTOM
+
         // Adjust the radius for the top and bottom
         const radius = vector.y > 0 ? radiusTop : radiusBottom;
         
-        vector.x *= radiusX / radius;
-        vector.z *= radiusY / radius;
+        vector.x *= (radiusX / radius);
+        vector.z *= (radiusY / radius);
         
         positionAttribute.setXYZ(i, vector.x, vector.y, vector.z);
       }
@@ -67,14 +74,26 @@ const WaveScene: React.FC = () => {
       console.log(event.deltaY); // Log deltaY to the console
       if (event.deltaY > 0) {
         // Scrolling up
+
+        // Wave dynamics effects
         setThetaLength(prev => Math.min(2 * Math.PI, prev + 0.1));
-        setRadialSegments(prev => Math.min(64, prev + 1));
-        setRadiusBottom(prev => Math.min(20, prev + 1));
+        setRadialSegments(prev => Math.min(64, prev + 0.8));
+        setHeightSegments(prev => Math.min(64, prev + 0.8));
+        // Barrel Surf Effect
+        setRadiusX(prev => Math.min(30, prev + 0.75));
+        setRadiusY(prev => Math.min(18, prev + 0.75));
+
       } else {
         // Scrolling down
+
+        // Wave dynamics effects
         setThetaLength(prev => Math.max(0, prev - 0.1));
-        setRadialSegments(prev => Math.max(8, prev - 1));
-        setRadiusBottom(prev => Math.max(5, prev - 1));
+        setRadialSegments(prev => Math.max(8, prev - 0.8));
+        setHeightSegments(prev => Math.max(8, prev - 0.8));
+        // Barrel Surf Effect
+        setRadiusX(prev => Math.max(10, prev - 0.75));
+        setRadiusY(prev => Math.max(6, prev - 0.75));
+
       }
     };
 
@@ -112,27 +131,32 @@ const WaveScene: React.FC = () => {
     scene.add(wave);
 
     function createWave() {
-      const geometry = new THREE.CylinderGeometry(1, 1, height, radialSegments, heightSegments, true, thetaStart, thetaLength);
+      const geometry = new THREE.CylinderGeometry(radiusTop, radiusBottom, height, radialSegments, heightSegments, true, thetaStart, thetaLength);
       
       // Modify vertices to form an oval shape
-      // const positionAttribute = geometry.getAttribute('position');
-      // const vector = new THREE.Vector3();
-      // for (let i = 0; i < positionAttribute.count; i++) {
-      //   vector.fromBufferAttribute(positionAttribute, i);
+      const positionAttribute = geometry.getAttribute('position');
+      const vector = new THREE.Vector3();
+      for (let i = 0; i < positionAttribute.count; i++) {
+        vector.fromBufferAttribute(positionAttribute, i);
         
-      //   // Adjust the radius for the top and bottom
-      //   const radius = vector.y > 0 ? radiusTop : radiusBottom;
+
+        // NEED TO CHECK THE BOTTOM HALF OF THE OVAL ITS THE SHOULDER THAT GROWS BUT SLOWER
+        // THE TOP HALF OF THE OVAL SHOULD EXPAND FASTER THAN THE BOTTOM
+
+        // Adjust the radius for the top and bottom
+        const radius = vector.y > 0 ? radiusTop : radiusBottom;
         
-      //   vector.x *= radiusX / radius;
-      //   vector.z *= radiusY / radius;
+        vector.x *= (radiusX / radius);
+        vector.z *= (radiusY / radius);
         
-      //   positionAttribute.setXYZ(i, vector.x, vector.y, vector.z);
-      // }
-      // positionAttribute.needsUpdate = true;
+        positionAttribute.setXYZ(i, vector.x, vector.y, vector.z);
+      }
+      positionAttribute.needsUpdate = true;
 
       const material = new THREE.MeshBasicMaterial({ color: 0x00aaff, side: THREE.BackSide, wireframe: true }); // Enable wireframe
       const waveMesh = new THREE.Mesh(geometry, material);
       waveMesh.rotation.x = Math.PI / 2;
+      waveMesh.rotation.y = Math.PI / 3;
       return waveMesh;
     }
 
