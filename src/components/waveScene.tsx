@@ -3,13 +3,15 @@ import * as THREE from 'three';
 
 const WaveScene: React.FC = () => {
   const mountRef = useRef<HTMLDivElement>(null);
-  const [radiusTop, setRadiusTop] = useState(5)
-  const [radiusBottom, setRadiusBottom] = useState(5)
-  const [height, setHeight] = useState(100)
+  const [radiusTop, setRadiusTop] = useState(5);
+  const [radiusBottom, setRadiusBottom] = useState(5);
+  const [radiusX, setRadiusX] = useState(10); // Radius for X-axis
+  const [radiusY, setRadiusY] = useState(6); // Radius for Y-axis
+  const [height, setHeight] = useState(100);
   const [radialSegments, setRadialSegments] = useState(8);
-  const [heightSegments, setHeightSegments] = useState(32);
-  const [thetaLength, setThetaLength] = useState(Math.PI * 0.5); // <<< start at 0.5 radian
-
+  const [heightSegments, setHeightSegments] = useState(10);
+  const [thetaLength, setThetaLength] = useState(Math.PI * 0.5); // Start at 0.5 radian
+  const thetaStart = Math.PI * 1.5; // 225 degrees in radians
 
   useEffect(() => {
     const currentMount = mountRef.current;
@@ -35,15 +37,34 @@ const WaveScene: React.FC = () => {
 
     // Function to create the wave mesh
     function createWave() {
-      const geometry = new THREE.CylinderGeometry(radiusTop, radiusBottom, height, radialSegments, heightSegments, true, 0, thetaLength);
+      const geometry = new THREE.CylinderGeometry(radiusTop, radiusBottom, height, radialSegments, heightSegments, true, thetaStart, thetaLength);
+      
+      // Modify vertices to form an oval shape
+      const positionAttribute = geometry.getAttribute('position');
+      const vector = new THREE.Vector3();
+      for (let i = 0; i < positionAttribute.count; i++) {
+        vector.fromBufferAttribute(positionAttribute, i);
+        
+        // Adjust the radius for the top and bottom
+        const radius = vector.y > 0 ? radiusTop : radiusBottom;
+        
+        vector.x *= radiusX / radius;
+        vector.z *= radiusY / radius;
+        
+        positionAttribute.setXYZ(i, vector.x, vector.y, vector.z);
+      }
+      positionAttribute.needsUpdate = true;
+
       const material = new THREE.MeshBasicMaterial({ color: 0x00aaff, side: THREE.BackSide, wireframe: true }); // Enable wireframe
       const waveMesh = new THREE.Mesh(geometry, material);
       waveMesh.rotation.x = Math.PI / 2;
+      waveMesh.rotation.y = Math.PI / 3;
       return waveMesh;
     }
 
     // Update wave geometry on scroll
     const handleScroll = (event: WheelEvent) => {
+      console.log(event.deltaY); // Log deltaY to the console
       if (event.deltaY > 0) {
         // Scrolling up
         setThetaLength(prev => Math.min(2 * Math.PI, prev + 0.1));
@@ -80,7 +101,7 @@ const WaveScene: React.FC = () => {
       window.removeEventListener('wheel', handleScroll);
       window.removeEventListener('resize', handleResize);
     };
-  }, [radiusTop, radiusBottom, height, radialSegments, heightSegments, thetaLength]);
+  }, [radiusTop, radiusBottom, radiusX, radiusY, height, radialSegments, heightSegments, thetaLength]);
 
   useEffect(() => {
     if (!mountRef.current) return;
@@ -91,14 +112,31 @@ const WaveScene: React.FC = () => {
     scene.add(wave);
 
     function createWave() {
-      const geometry = new THREE.CylinderGeometry(radiusTop, radiusBottom, height, radialSegments, heightSegments, true, 0, thetaLength);
+      const geometry = new THREE.CylinderGeometry(1, 1, height, radialSegments, heightSegments, true, thetaStart, thetaLength);
+      
+      // Modify vertices to form an oval shape
+      // const positionAttribute = geometry.getAttribute('position');
+      // const vector = new THREE.Vector3();
+      // for (let i = 0; i < positionAttribute.count; i++) {
+      //   vector.fromBufferAttribute(positionAttribute, i);
+        
+      //   // Adjust the radius for the top and bottom
+      //   const radius = vector.y > 0 ? radiusTop : radiusBottom;
+        
+      //   vector.x *= radiusX / radius;
+      //   vector.z *= radiusY / radius;
+        
+      //   positionAttribute.setXYZ(i, vector.x, vector.y, vector.z);
+      // }
+      // positionAttribute.needsUpdate = true;
+
       const material = new THREE.MeshBasicMaterial({ color: 0x00aaff, side: THREE.BackSide, wireframe: true }); // Enable wireframe
       const waveMesh = new THREE.Mesh(geometry, material);
       waveMesh.rotation.x = Math.PI / 2;
       return waveMesh;
     }
 
-  }, [radiusTop, radiusBottom, height, radialSegments, heightSegments, thetaLength]);
+  }, [radiusTop, radiusBottom, radiusX, radiusY, height, radialSegments, heightSegments, thetaLength]);
 
   return <div ref={mountRef} />;
 };
