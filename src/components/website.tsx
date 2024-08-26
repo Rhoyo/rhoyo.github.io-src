@@ -4,9 +4,8 @@ This is the component that will host the iframe that'll contain the website I've
 
 */
 import * as React from "react"
-import * as THREE from 'three'
 import Box from '@mui/material/Box';
-import resumePDF from '../resources/resume.pdf';
+import resumePDF  from '../resources/resume.pdf';
 
 interface WebsiteProps {
     link: string

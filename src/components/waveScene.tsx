@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import * as THREE from 'three';
+import { createWave, createParticles } from '../ts/waveHelper';
 
 const WaveScene: React.FC = () => {
   const mountRef = useRef<HTMLDivElement>(null);
@@ -28,8 +29,21 @@ const WaveScene: React.FC = () => {
     currentMount.appendChild(renderer.domElement);
 
     // Create initial wave/tunnel and shoulder geometry
-    let wave = createWave();
+    let wave = createWave(
+      radiusTop,
+      radiusBottom, 
+      radiusX, 
+      radiusY, 
+      height, 
+      radialSegments, 
+      heightSegments, 
+      thetaStart, 
+      thetaLength);
     scene.add(wave);
+
+    // Create particle system for spray effect
+    // const particles = createParticles(radiusX, radiusY, height, thetaLength);
+    // scene.add(particles);
 
     // Add portfolio elements (example: a simple box)
     const boxGeometry = new THREE.BoxGeometry(1, 1, 1);
@@ -37,37 +51,6 @@ const WaveScene: React.FC = () => {
     const box = new THREE.Mesh(boxGeometry, boxMaterial);
     box.position.z = -50;
     scene.add(box);
-
-    // Function to create the wave mesh
-    function createWave() {
-      const geometry = new THREE.CylinderGeometry(radiusTop, radiusBottom, height, radialSegments, heightSegments, true, thetaStart, thetaLength);
-      
-      // Modify vertices to form an oval shape
-      const positionAttribute = geometry.getAttribute('position');
-      const vector = new THREE.Vector3();
-      for (let i = 0; i < positionAttribute.count; i++) {
-        vector.fromBufferAttribute(positionAttribute, i);
-        
-
-        // NEED TO CHECK THE BOTTOM HALF OF THE OVAL ITS THE SHOULDER THAT GROWS BUT SLOWER
-        // THE TOP HALF OF THE OVAL SHOULD EXPAND FASTER THAN THE BOTTOM
-
-        // Adjust the radius for the top and bottom
-        const radius = vector.y > 0 ? radiusTop : radiusBottom;
-        
-        vector.x *= (radiusX / radius);
-        vector.z *= (radiusY / radius);
-        
-        positionAttribute.setXYZ(i, vector.x, vector.y, vector.z);
-      }
-      positionAttribute.needsUpdate = true;
-
-      const material = new THREE.MeshBasicMaterial({ color: 0x00aaff, side: THREE.BackSide, wireframe: true }); // Enable wireframe
-      const waveMesh = new THREE.Mesh(geometry, material);
-      waveMesh.rotation.x = Math.PI / 2;
-      waveMesh.rotation.y = Math.PI / 3;
-      return waveMesh;
-    }
 
     // Update wave geometry on scroll
     const handleScroll = (event: WheelEvent) => {
@@ -127,38 +110,17 @@ const WaveScene: React.FC = () => {
 
     // Update wave geometry
     const scene = new THREE.Scene();
-    const wave = createWave();
+    const wave = createWave(
+      radiusTop,
+      radiusBottom, 
+      radiusX, 
+      radiusY, 
+      height, 
+      radialSegments, 
+      heightSegments, 
+      thetaStart, 
+      thetaLength);
     scene.add(wave);
-
-    function createWave() {
-      const geometry = new THREE.CylinderGeometry(radiusTop, radiusBottom, height, radialSegments, heightSegments, true, thetaStart, thetaLength);
-      
-      // Modify vertices to form an oval shape
-      const positionAttribute = geometry.getAttribute('position');
-      const vector = new THREE.Vector3();
-      for (let i = 0; i < positionAttribute.count; i++) {
-        vector.fromBufferAttribute(positionAttribute, i);
-        
-
-        // NEED TO CHECK THE BOTTOM HALF OF THE OVAL ITS THE SHOULDER THAT GROWS BUT SLOWER
-        // THE TOP HALF OF THE OVAL SHOULD EXPAND FASTER THAN THE BOTTOM
-
-        // Adjust the radius for the top and bottom
-        const radius = vector.y > 0 ? radiusTop : radiusBottom;
-        
-        vector.x *= (radiusX / radius);
-        vector.z *= (radiusY / radius);
-        
-        positionAttribute.setXYZ(i, vector.x, vector.y, vector.z);
-      }
-      positionAttribute.needsUpdate = true;
-
-      const material = new THREE.MeshBasicMaterial({ color: 0x00aaff, side: THREE.BackSide, wireframe: true }); // Enable wireframe
-      const waveMesh = new THREE.Mesh(geometry, material);
-      waveMesh.rotation.x = Math.PI / 2;
-      waveMesh.rotation.y = Math.PI / 3;
-      return waveMesh;
-    }
 
   }, [radiusTop, radiusBottom, radiusX, radiusY, height, radialSegments, heightSegments, thetaLength]);
 
