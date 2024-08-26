@@ -63,14 +63,27 @@ iframe::-webkit-pdf-navpane {
 }
 
 .portfolio {
+    position: relative;
     display: flex;
     flex-direction: row;
+    z-index: 2;
 }
 
 @media screen and (max-width: 750px) {
     .portfolio {
+        position: relative;
         display: flex;
         flex-direction: column;
         align-items: center;
+        z-index: 2;
     }
+}
+
+.waveScene {
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
