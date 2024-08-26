@@ -7,6 +7,8 @@ import '../style/components.css';
 // components
 import ScrollTo from "../components/scrollTo";
 import WaveScene from "../components/waveScene";
+import Website from "../components/website";
+import Portfolio from "../components/portfolio";
 
 const PortfolioProps = {
   links: [
@@ -30,7 +32,6 @@ const IndexPage: React.FC<PageProps> = () => {
         color: theme.palette.text.primary,
       }}>
       <WaveScene/>
-
       </main>
     </ThemeProvider>
   )
