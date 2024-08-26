@@ -31,7 +31,13 @@ const IndexPage: React.FC<PageProps> = () => {
         minHeight: '100vh', 
         color: theme.palette.text.primary,
       }}>
-      <WaveScene/>
+      <div className="waveScene">
+        <WaveScene/>
+      </div>
+      {/* <Portfolio
+        links = {PortfolioProps.links}
+        titles = {PortfolioProps.titles}
+      /> */}
       </main>
     </ThemeProvider>
   )
