@@ -1,5 +1,4 @@
 import * as React from "react"
-import theme from "../style/theme";
 import Paper from '@mui/material/Paper';
 
 interface PaperCardProps {

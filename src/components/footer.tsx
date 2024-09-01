@@ -1,5 +1,4 @@
 import * as React from "react"
-import theme from "../theme";
 
 const Footer = () => {
   return (
