@@ -4,9 +4,9 @@ This is the component that will host the website components
 
 */
 import * as React from "react"
-import theme from "../style/theme";
 import Paper from '@mui/material/Paper';
 import Website from "./website";
+import { ParallaxProvider, Parallax } from 'react-scroll-parallax';
 
 interface PortfolioProps {
     links: string[]

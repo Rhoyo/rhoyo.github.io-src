@@ -7,7 +7,7 @@ import '../style/components.css';
 // components
 import ScrollTo from "../components/scrollTo";
 import WaveScene from "../components/waveScene";
-import Website from "../components/website";
+import Header from "../components/header";
 import Portfolio from "../components/portfolio";
 
 const PortfolioProps = {
@@ -34,10 +34,10 @@ const IndexPage: React.FC<PageProps> = () => {
       <div className="waveScene">
         <WaveScene/>
       </div>
-      {/* <Portfolio
+      <Portfolio
         links = {PortfolioProps.links}
         titles = {PortfolioProps.titles}
-      /> */}
+      />
       </main>
     </ThemeProvider>
   )
