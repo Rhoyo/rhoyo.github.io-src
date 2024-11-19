@@ -54,7 +54,7 @@ const WaveScene: React.FC = () => {
 
     // Update wave geometry on scroll
     const handleScroll = (event: WheelEvent) => {
-      console.log(event.deltaY); // Log deltaY to the console
+      console.log(thetaLength);
       if (event.deltaY > 0) {
         // Scrolling up
 
@@ -102,6 +102,7 @@ const WaveScene: React.FC = () => {
       currentMount.removeChild(renderer.domElement);
       window.removeEventListener('wheel', handleScroll);
       window.removeEventListener('resize', handleResize);
+      wave.geometry.dispose();
     };
   }, [radiusTop, radiusBottom, radiusX, radiusY, height, radialSegments, heightSegments, thetaLength]);
 
