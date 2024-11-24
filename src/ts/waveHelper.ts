@@ -32,17 +32,21 @@ export function createWave(radiusTop: number, radiusBottom: number, radiusX: num
   canvas.height = 512;
   const ctx = canvas.getContext('2d');
   if (ctx) {
-      const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-      gradient.addColorStop(0, 'blue');
-      gradient.addColorStop(1, 'white');
-      ctx.fillStyle = gradient;
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+    const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+    gradient.addColorStop(0, 'blue');
+    gradient.addColorStop(1, 'white');
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
   }
 
   const texture = new THREE.CanvasTexture(canvas);
 
-  const material = new THREE.MeshBasicMaterial({
+  // Use a light-sensitive material
+  const material = new THREE.MeshStandardMaterial({
     map: texture,
+    opacity: 0.8,
+    roughness: 0.75,  // How rough the surface appears (0 = shiny, 1 = matte)
+    metalness: 0.3,  // How metallic the surface appears (0 = non-metallic, 1 = metallic)
     side: THREE.BackSide, // To make the inside of the wave visible
   });
 

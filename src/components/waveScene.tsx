@@ -16,6 +16,9 @@ const WaveScene: React.FC = () => {
   const [thetaLength, setThetaLength] = useState(Math.PI * 0.5); // Start at 0.5 radian
   const thetaStart = Math.PI * 1.5; // 225 degrees in radians
 
+  // Light Camera Vars
+  const [lightZ, setLightZ] = useState(-50);
+
 
   useEffect(() => {
     const currentMount = mountRef.current;
@@ -24,9 +27,14 @@ const WaveScene: React.FC = () => {
     // Set up the scene, camera, and renderer
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const light = new THREE.PointLight(0xffffff, 50, 300); // A point light with a range of 100
+    light.position.set(0, 0, lightZ); // the light should appear at the end of the barrel
+    camera.add(light); 
+    scene.add(camera);
     const renderer = new THREE.WebGLRenderer();
     renderer.setSize(window.innerWidth, window.innerHeight);
     currentMount.appendChild(renderer.domElement);
+    let animationID: number;
 
     // Create initial wave/tunnel and shoulder geometry
     let wave = createWave(
@@ -42,8 +50,8 @@ const WaveScene: React.FC = () => {
     scene.add(wave);
 
     // Create particle system for spray effect
-    // const particles = createParticles(radiusX, radiusY, height, thetaLength);
-    // scene.add(particles);
+    const particles = createParticles(radiusX, radiusY, height, thetaLength);
+    scene.add(particles);
 
     // Add portfolio elements (example: a simple box)
     const boxGeometry = new THREE.BoxGeometry(1, 1, 1);
@@ -54,7 +62,8 @@ const WaveScene: React.FC = () => {
 
     // Update wave geometry on scroll
     const handleScroll = (event: WheelEvent) => {
-      console.log(thetaLength);
+      // console.log(thetaLength);
+      console.log(lightZ);
       if (event.deltaY > 0) {
         // Scrolling up
 
@@ -65,6 +74,8 @@ const WaveScene: React.FC = () => {
         // Barrel Surf Effect
         setRadiusX(prev => Math.min(30, prev + 0.75));
         setRadiusY(prev => Math.min(18, prev + 0.75));
+        // Light Effect, exiting barrel
+        setLightZ(prev => Math.min(-50, prev + 0.5));
 
       } else {
         // Scrolling down
@@ -77,14 +88,15 @@ const WaveScene: React.FC = () => {
         setRadiusX(prev => Math.max(10, prev - 0.75));
         setRadiusY(prev => Math.max(6, prev - 0.75));
 
+        // Light Effect, moving backwards in barrel
+        setLightZ(prev => Math.max(-20, prev - 0.5));
       }
     };
 
     window.addEventListener('wheel', handleScroll);
-
     // Animation loop
     const animate = () => { 
-      requestAnimationFrame(animate);
+      animationID = requestAnimationFrame(animate);
       renderer.render(scene, camera);
     };
     animate();
@@ -99,10 +111,23 @@ const WaveScene: React.FC = () => {
 
     // Cleanup on unmount
     return () => {
-      currentMount.removeChild(renderer.domElement);
+      // Remove renderer from DOM
+      if (renderer.domElement && currentMount.contains(renderer.domElement)) {
+        currentMount.removeChild(renderer.domElement);
+      }
+      // Dispose wave geometry
+      wave.geometry.dispose();
+
+      // Dispose other objects in the scene (example: box)
+      box.geometry.dispose();
+      box.material.dispose();
+
+      // Cancel animation frame
+      cancelAnimationFrame(animationID);
+
+      // Remove event listeners
       window.removeEventListener('wheel', handleScroll);
       window.removeEventListener('resize', handleResize);
-      wave.geometry.dispose();
     };
   }, [radiusTop, radiusBottom, radiusX, radiusY, height, radialSegments, heightSegments, thetaLength]);
 

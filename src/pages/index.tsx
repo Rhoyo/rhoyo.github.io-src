@@ -34,10 +34,10 @@ const IndexPage: React.FC<PageProps> = () => {
       <div className="waveScene">
         <WaveScene/>
       </div>
-      <Portfolio
+      {/* <Portfolio
         links = {PortfolioProps.links}
         titles = {PortfolioProps.titles}
-      />
+      /> */}
       </main>
     </ThemeProvider>
   )
