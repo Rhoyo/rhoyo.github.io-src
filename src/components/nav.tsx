@@ -9,11 +9,11 @@ import MenuIcon from '@mui/icons-material/Menu';
 
 const NavigationBar: React.FC = () => {
   const [isDrawerOpen, setDrawerOpen] = useState(false);
-  const [buttonDisplay, setButtonDisplay] = useState('flex');
+  const [buttonOpacity, setButtonOpacity] = useState(1);
 
-  const toggleDrawer = (open: boolean, display: string) => {
+  const toggleDrawer = (open: boolean, opacity: number) => {
     setDrawerOpen(open);
-    setButtonDisplay(display);
+    setButtonOpacity(opacity);
   };
 
   const scrollToSection = (id: string) => {
@@ -29,13 +29,13 @@ const NavigationBar: React.FC = () => {
       <IconButton
         style = {{
           color: theme.palette.secondary.main,
-          display: buttonDisplay,
+          opacity: buttonOpacity,
           margin: theme.spacing(1),
           backgroundColor: 'transparent', 
         }}
        onClick={
         () => {
-          toggleDrawer(true, 'none')   
+          toggleDrawer(true, 0)   
         }
        }
        >
@@ -45,7 +45,7 @@ const NavigationBar: React.FC = () => {
       <Drawer 
         anchor="top" 
         open={isDrawerOpen} 
-        onClose={() => toggleDrawer(false, 'flex')}
+        onClose={() => toggleDrawer(false, 1)}
         
       >
         <List
