@@ -14,23 +14,23 @@ interface PortfolioProps {
 }
 
 const Portfolio: React.FC<PortfolioProps> = ({ links, titles }) => {
-  return (
-    <Paper
-        elevation={0.5}
-        className = 'portfolio'
-    >
-        {
-            links.map((link, idx) => {
-                return (
-                    <Website
-                        link = {link}
-                        title = {titles[idx]}
-                    />
-                )
-            })
-        }
-    </Paper>
-  );
+    return (
+        <Paper
+            elevation={0.5}
+            className='portfolio'
+        >
+            {
+                links.map((link, idx) => {
+                    return (
+                        <Website
+                            link={link}
+                            title={titles[idx]}
+                        />
+                    )
+                })
+            }
+        </Paper>
+    );
 };
 
 export default Portfolio;

@@ -9,16 +9,16 @@ import IconButton from '@mui/material/IconButton';
 import ArrowCircleUpIcon from '@mui/icons-material/ArrowCircleUp';
 
 const handleScrollToTop = () => {
-    window.scrollTo({top: 0, behavior: 'smooth'});
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 const ScrollTo: React.FC = () => {
     return (
         <IconButton
-            onClick = { () => {
+            onClick={() => {
                 handleScrollToTop();
             }}
-            style = {
+            style={
                 {
                     position: 'fixed',
                     right: '3vw',
@@ -26,7 +26,7 @@ const ScrollTo: React.FC = () => {
                 }
             }
         >
-            <ArrowCircleUpIcon/>
+            <ArrowCircleUpIcon />
         </IconButton>
     );
 }

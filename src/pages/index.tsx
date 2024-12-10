@@ -6,9 +6,9 @@ import '../style/components.css';
 
 // components
 import ScrollTo from "../components/scrollTo";
-import WaveScene from "../components/waveScene";
 import Header from "../components/header";
 import Portfolio from "../components/portfolio";
+import About from "../components/about";
 
 const PortfolioProps = {
   links: [
@@ -27,18 +27,18 @@ const IndexPage: React.FC<PageProps> = () => {
   return (
     <ThemeProvider theme={theme}>
       <main style={{
-        backgroundColor: theme.palette.background.default, 
-        minHeight: '100vh', 
+        backgroundColor: theme.palette.background.default,
+        minHeight: '100vh',
         color: theme.palette.text.primary,
       }}>
-      <div className="waveScene">
-        <WaveScene/>
-      </div>
-      {/* <Portfolio
-        links = {PortfolioProps.links}
-        titles = {PortfolioProps.titles}
-      /> */}
+        <Header />
+        <About />
+        <Portfolio
+          links={PortfolioProps.links}
+          titles={PortfolioProps.titles}
+        />
       </main>
+      <ScrollTo />
     </ThemeProvider>
   )
 }
