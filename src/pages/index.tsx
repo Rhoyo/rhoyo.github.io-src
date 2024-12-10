@@ -39,6 +39,7 @@ const IndexPage: React.FC<PageProps> = () => {
         />
         <ScrollTo />
       </main>
+      <ScrollTo />
     </ThemeProvider>
   )
 }
