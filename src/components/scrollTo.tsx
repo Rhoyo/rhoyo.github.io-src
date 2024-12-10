@@ -22,7 +22,8 @@ const ScrollTo: React.FC = () => {
                 {
                     position: 'fixed',
                     right: '3vw',
-                    bottom: '5vw'
+                    bottom: '5vw',
+                    zIndex: 1000,
                 }
             }
         >
