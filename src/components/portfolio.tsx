@@ -15,8 +15,7 @@ interface PortfolioProps {
 
 const Portfolio: React.FC<PortfolioProps> = ({ links, titles }) => {
     return (
-        <Paper
-            elevation={0.5}
+        <div
             className='portfolio'
         >
             {
@@ -29,7 +28,7 @@ const Portfolio: React.FC<PortfolioProps> = ({ links, titles }) => {
                     )
                 })
             }
-        </Paper>
+        </div>
     );
 };
 

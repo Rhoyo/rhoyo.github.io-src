@@ -14,7 +14,8 @@ const About: React.FC = () => {
         elevation={2}
         style = {{
             marginLeft: '20vw',
-            marginRight: '20vw'
+            marginRight: '20vw',
+            borderRadius: 5,
         }}
     >
         <h1
