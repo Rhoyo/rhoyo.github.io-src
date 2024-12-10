@@ -25,4 +25,4 @@ const WavePage: React.FC<PageProps> = () => {
 
 export default WavePage;
 
-export const Head: HeadFC = () => <title>rho</title>
+export const Head: HeadFC = () => <title>Rho: waveScene</title>

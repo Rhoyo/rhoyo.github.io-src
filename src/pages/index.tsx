@@ -37,6 +37,7 @@ const IndexPage: React.FC<PageProps> = () => {
           links={PortfolioProps.links}
           titles={PortfolioProps.titles}
         />
+        <ScrollTo />
       </main>
       <ScrollTo />
     </ThemeProvider>
