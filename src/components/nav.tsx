@@ -107,6 +107,16 @@ const NavigationBar: React.FC = () => {
               Github
             </Button>
           </ListItem>
+          <ListItem
+            className='header-list-item'
+          >
+            <Button
+              href="/wave"
+              variant="text"
+            >
+                Three.js Sandbox: Wave
+            </Button>
+          </ListItem>
         </List>
       </Drawer>
     </>
