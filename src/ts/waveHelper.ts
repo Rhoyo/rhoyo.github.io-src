@@ -34,8 +34,8 @@ export function createWave(radiusTop: number, radiusBottom: number, radiusX: num
   if (ctx) {
     const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
     gradient.addColorStop(0, "#47dded");
-    gradient.addColorStop(0.85, "#97e7f0");
-    gradient.addColorStop(0.9, 'white');
+    gradient.addColorStop(0.5, "#97e7f0");
+    gradient.addColorStop(0.98, "#97e7f0");
     gradient.addColorStop(1, 'white');
     ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
