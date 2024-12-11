@@ -29,10 +29,10 @@ const About: React.FC = () => {
                 padding: '5vw'
             }}
         >
-            Density.
+            The distance of you from the origin.
             <br/>
             <br/>
-            Widely recognized by the greek symbol, ρ, rho.
+            Widely recognized by the greek letter, ρ, rho.
         </p> 
     </Paper>
   )
