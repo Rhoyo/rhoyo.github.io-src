@@ -3,7 +3,16 @@
     align-items: cross-axis
     align-content: control space between
 */
+body {
+    margin: 0;
 
+}
+
+.header-list {
+    display: flex;
+    flex-direction: row;
+    background-color: rgba(5,32,14, 0.80);
+}
 
 /* Header Classes */
 .header-list-item {
@@ -103,5 +112,10 @@ iframe::-webkit-pdf-navpane {
         width: 40%;
         height: 100vw;
         margin: 2%;
+    }
+    .header-list {
+        display: flex;
+        background-color: rgba(5,32,14, 0.80);
+        flex-direction: column;
     }
 }
