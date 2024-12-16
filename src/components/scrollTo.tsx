@@ -24,6 +24,7 @@ const ScrollTo: React.FC = () => {
                     right: '3vw',
                     bottom: '5vw',
                     zIndex: 1000,
+                    padding: 0,
                 }
             }
         >
