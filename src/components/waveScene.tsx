@@ -24,12 +24,9 @@ const WaveScene: React.FC = () => {
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0x222222); 
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    const light = new THREE.DirectionalLight(0xffffff, 10); // increase the light's intensity
-    light.position.set(30, 1000, -50); // set the light's position to a high altitude
+    const light = new THREE.DirectionalLight(0xf5f0da, 5); // increase the light's intensity
+    light.position.set(0, 1000, -500); // set the light's position to a high altitude
     light.target.position.set(0, 0, 0); // set the light's target to the origin
-    light.castShadow = true; // enable shadows
-    light.shadow.bias = -0.001;
-    light.rotateX(Math.PI / 4);
     
     scene.add(light); 
     scene.add(camera);
@@ -49,11 +46,9 @@ const WaveScene: React.FC = () => {
       heightSegments, 
       thetaStart, 
       thetaLength);
+    const particles = createParticles();
+    wave.add(particles);
     scene.add(wave);
-
-    // Create particle system for spray effect
-    // const particles = createParticles(radiusX, radiusY, height, thetaLength);
-    // scene.add(particles);
 
     // Add portfolio elements (example: a simple box)
     const boxGeometry = new THREE.BoxGeometry(1, 1, 1);

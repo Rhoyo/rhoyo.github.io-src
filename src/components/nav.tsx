@@ -49,19 +49,7 @@ const NavigationBar: React.FC = () => {
         
       >
         <List
-          style={
-            typeof window !== 'undefined' && window.outerWidth > 450 ?     
-              {
-                display: 'flex',
-                background: 'rgba(5,32,14, 0.8)'
-              }
-            :
-              {
-                maxHeight: '150px',
-                overflow: 'auto',
-                background: 'rgba(5,32,14, 0.8)'
-              }
-        }
+          className='header-list'
         >
           <ListItem
             className='header-list-item'

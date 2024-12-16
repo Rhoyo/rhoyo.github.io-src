@@ -1,5 +1,4 @@
 import * as THREE from 'three';
-
 // Function to create the wave mesh
 export function createWave(radiusTop: number, radiusBottom: number, radiusX: number, radiusY: number, height: number, radialSegments: number, heightSegments: number, thetaStart: number, thetaLength: number): THREE.Mesh {
   const geometry = new THREE.CylinderGeometry(radiusTop, radiusBottom, height, radialSegments, heightSegments, true, thetaStart, thetaLength);
@@ -33,22 +32,25 @@ export function createWave(radiusTop: number, radiusBottom: number, radiusX: num
   const ctx = canvas.getContext('2d');
   if (ctx) {
     const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-    gradient.addColorStop(0, "#47dded");
-    gradient.addColorStop(0.5, "#97e7f0");
-    gradient.addColorStop(0.98, "#97e7f0");
-    gradient.addColorStop(1, 'white');
+    gradient.addColorStop(0, "#edd69d"); //edd69d //47dded
+    gradient.addColorStop(0.35, "#edd69d");
+    gradient.addColorStop(0.7, "#47dded");
+    gradient.addColorStop(1, '#f5f0da');
     ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
   }
 
   const texture = new THREE.CanvasTexture(canvas);
-  const bumpTexture = new THREE.TextureLoader().load('../images/wave-bump-map.png');
+  const bumpTexture = new THREE.TextureLoader().load('https://raw.githubusercontent.com/Rhoyo/rhoyo.github.io-src/refs/heads/main/src/images/wave-bump-map-1.png');
   // Use a light-sensitive material
   const material = new THREE.MeshStandardMaterial({
     map: texture,
     opacity: 0.5,
     roughness: 0.2,  // How rough the surface appears (0 = shiny, 1 = matte)
     metalness: 0.2,  // How metallic the surface appears (0 = non-metallic, 1 = metallic)
+    aoMap: bumpTexture,
+    emissive: new THREE.Color(0x47dded),
+    emissiveIntensity: 0.1,
     transparent: true,
     side: THREE.BackSide, // To make the inside of the wave visible
   });
@@ -62,31 +64,23 @@ export function createWave(radiusTop: number, radiusBottom: number, radiusX: num
 }
 
 // Function to create the particle system for the spray effect
-export function createParticles(radiusX: number, radiusY: number, height: number, thetaLength: number): THREE.Points {
-  const particleCount = 1000;
+export function createParticles(): THREE.Points {
+  const particleCount = 3000;
   const particles = new THREE.BufferGeometry();
-  const particlePositions = new Float32Array(particleCount * 3);
-  const particleVelocities = new Float32Array(particleCount * 3);
+  const positions = new Float32Array(particleCount * 3);
+  const velocities = new Float32Array(particleCount * 3);
 
   for (let i = 0; i < particleCount; i++) {
-    const theta = thetaLength + Math.PI * 1.25 + Math.random() * 0.1 - 0.05; // Spread particles around thetaStart
-    const x = radiusX * Math.cos(theta);
-    const y = radiusY * Math.sin(theta);
-    const z = Math.random() * height - height / 2;
-
-    particlePositions[i * 3] = x;
-    particlePositions[i * 3 + 1] = y;
-    particlePositions[i * 3 + 2] = z;
-
-    particleVelocities[i * 3] = (Math.random() - 0.5) * 2;
-    particleVelocities[i * 3 + 1] = (Math.random() - 0.5) * 2;
-    particleVelocities[i * 3 + 2] = (Math.random() - 0.5) * 2;
+    positions[i * 3] = Math.random() * 2 - 1;
+    positions[i * 3 + 1] = Math.random() * 2 - 1;
+    positions[i * 3 + 2] = Math.random() * 15 - 5;
   }
 
-  particles.setAttribute('position', new THREE.BufferAttribute(particlePositions, 3));
-  particles.setAttribute('velocity', new THREE.BufferAttribute(particleVelocities, 3));
-
-  let particleMaterial = new THREE.PointsMaterial({ color: 0xffffff, size: 0.1 });
+  particles.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+  let particleMaterial = new THREE.PointsMaterial({
+    color: 0xffffff,
+    size: 0.005
+  });
 
   return new THREE.Points(particles, particleMaterial);
 }
