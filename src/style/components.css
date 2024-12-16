@@ -97,7 +97,7 @@ iframe::-webkit-pdf-navpane {
         align-items: center;
         justify-self: center;
         z-index: 2;
-        width: 85%;
+        width: 75%;
     }
     .website-header {
         text-align: center;
