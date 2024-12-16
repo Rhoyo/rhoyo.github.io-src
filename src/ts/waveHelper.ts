@@ -41,7 +41,7 @@ export function createWave(radiusTop: number, radiusBottom: number, radiusX: num
   }
 
   const texture = new THREE.CanvasTexture(canvas);
-  const bumpTexture = new THREE.TextureLoader().load('https://raw.githubusercontent.com/Rhoyo/rhoyo.github.io-src/main/src/images/wave-bump-map-2.png');
+  const bumpTexture = new THREE.TextureLoader().load('https://raw.githubusercontent.com/Rhoyo/rhoyo.github.io-src/main/src/images/wave-bump-map-3.jpg');
   // Use a light-sensitive material
   const material = new THREE.MeshStandardMaterial({
     map: texture,
